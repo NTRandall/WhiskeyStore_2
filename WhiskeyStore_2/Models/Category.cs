@@ -14,6 +14,6 @@ namespace WhiskeyStore_2.Models
         [MaxLength(45, ErrorMessage = "The category name can be a maximum 45 characters long")]
         public string Name { get; set; }
 
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

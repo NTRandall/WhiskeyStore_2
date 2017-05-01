@@ -21,7 +21,7 @@ namespace WhiskeyStore_2.Models
         [Column(TypeName = "datetime2")]
         public DateTime DateCreated { get; set; }
 
-        public virtual Products Product { get; set; }
+        public virtual Product Product { get; set; }
 
 
     }

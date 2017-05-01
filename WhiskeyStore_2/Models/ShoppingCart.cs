@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WhiskeyStore_2.DAL;
 
 namespace WhiskeyStore_2.Models
 {
@@ -51,7 +52,7 @@ namespace WhiskeyStore_2.Models
 
         public int RemoveFromCart(int id)
         {
-            var cartItem = db.SingleOrDefault(cart => cart.CartId == ShoppingCartId && cart.ProductId == id);
+            var cartItem = db.Carts.SingleOrDefault(cart => cart.CartId == ShoppingCartId && cart.ProductId == id);
 
             int itemCount = 0;
 
