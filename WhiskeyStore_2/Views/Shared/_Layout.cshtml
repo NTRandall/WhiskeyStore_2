@@ -1,11 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using System
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Whisk(E)Y Journey</title>
+    <link href="https://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,8 +23,16 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                    <li>@if (Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Welcome", +User.Identity.Name + "   Logout", "LogOff", "Accounts")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Login", "LogOn", "Accounts")
+                        }
+                        </li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
@@ -31,12 +42,50 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Whisk(E)y Journey Developed by Nathan Randall</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script src="~/Content/Js/ResponsiveSlider.js"></script>
+<script type="text/javascript">
+
+    $(".rslides").responsiveSlides({
+        auto: true,
+        speed: 500
+    });
+</script>
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".RemoveLink").click(function(e) {
+            e.preventDefault();
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+            if (recordToDelete != '') {
+                //Perfomr the ajax post
+                $.post("/ShoppingCart/RemoveFromCart",
+                    { "id": recordToDelete },
+                    function(data) {
+                        //Successful requests get here
+                        //Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        }
+                        $('#cart-total').text(data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $('cart-status').text('Cart(' + data.CartCount + ')');
+                    });
+                    
+                    
+                
+            }
+        });
+    })
+</script>
 </body>
 </html>
