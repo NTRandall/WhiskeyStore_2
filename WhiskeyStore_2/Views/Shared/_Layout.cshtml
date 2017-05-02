@@ -1,4 +1,4 @@
-﻿@using System
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
                     <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                     <li>@if (Request.IsAuthenticated)
                         {
-                            @Html.ActionLink("Welcome", +User.Identity.Name + "   Logout", "LogOff", "Accounts")
+                            @Html.ActionLink("Welcome" + User.Identity.Name + "   Logout", "LogOff", "Accounts")
                         }
                         else
                         {
