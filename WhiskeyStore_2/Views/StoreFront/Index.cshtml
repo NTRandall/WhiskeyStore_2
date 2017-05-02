@@ -1,0 +1,88 @@
+﻿@model WhiskeyStore_2.Models.Category
+
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+
+<br/>
+<br/>
+
+<div class="row">
+    <div  class="col-xs-12 col-md-3"></div>
+    <ul class="nav nav-pills nav-stacked">
+        @if (Model.Name == "Bourbon")
+        {
+            <li class="active">
+                <a href="~/StoreFront/Index/1">Bourbon</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="~/StoreFront/Index/1">Bourbon</a>
+            </li>
+        }
+        @if (Model.Name == "Scotch")
+        {
+            <li class="active">
+                <a href="~/StoreFront/Index/2">Scotch</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="~/StoreFront/Index/2">Scotch</a>
+            </li>
+        }
+        @if (Model.Name == "Irish Whiskey")
+        {
+            <li class="active">
+                <a href="~/StoreFront/Index/3">Irish Whiskey</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="~/StoreFront/Index/3">Irish Whiskey</a>
+            </li>
+        }
+        @if (Model.Name == "World Whiskey")
+        {
+            <li class="active">
+                <a href="~/StoreFront/Index/4">World Whiskey</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="~/StoreFront/Index/4">World Whiskey</a>
+            </li>
+        }
+    
+    </ul>
+</div>
+<div class="col-xs-12 col-md-9">
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-xs-12 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive" src="/Content/Images/Products/@(product.Name).png"/>
+                <div class="caption text-center">
+                    <p>
+                        <b>Name:</b> <span>@product.Name</span>
+                    </p>
+                    <p>
+                        <b>Price:</b> <span>@product.Price USD</span>
+                    </p>
+                    <p class="text-center">
+                        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new {id = product.Id}, new {@class="btn btn-info"})
+                    </p>
+                </div>
+            </div>
+         </div>
+        }
+    </div>
+</div>
+

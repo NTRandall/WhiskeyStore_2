@@ -26,7 +26,6 @@ namespace WhiskeyStore_2.DAL
 
         public DbSet<Cart> Carts { get; set; }
 
-
-
+        public System.Data.Entity.DbSet<WhiskeyStore_2.Models.ShoppingCart> ShoppingCarts { get; set; }
     }
 }

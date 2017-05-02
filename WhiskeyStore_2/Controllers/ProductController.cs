@@ -11,7 +11,7 @@ using WhiskeyStore_2.Models;
 
 namespace WhiskeyStore_2.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private WhiskeyStoreContext db = new WhiskeyStoreContext();
 
